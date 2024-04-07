@@ -31,7 +31,7 @@ def function1():
 
         # Gets player(s) name
         query = server.query()
-        print(colorama.Fore.LIGHTGREEN_EX, f"{user_input} has the following players online: {query.players.names()}")
+        print(colorama.Fore.LIGHTGREEN_EX, f"{user_input} has the following players online: {query.players.names}")
 
 
     # Handles errors
@@ -56,7 +56,7 @@ def function2():
 
         print(f"{bruser_input} has a max player count of {status.players.max}")
         print(colorama.Fore.LIGHTGREEN_EX, f"{bruser_input} has {status.players.online} player(s) online and replied in {status.latency} ms")
-        print()
+        
 
     except Exception as brerror:
         print(colorama.Fore.LIGHTRED_EX, f"An error has ocurred: {brerror}")
