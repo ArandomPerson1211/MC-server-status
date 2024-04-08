@@ -4,7 +4,6 @@ from mcstatus import BedrockServer
 import colorama
 
 
-
 # Defines Menu
 def menu():
     colorama.Fore.RESET
@@ -41,7 +40,6 @@ def function1():
         print(colorama.Fore.YELLOW, "Note: Most servers have query disabled", colorama.Fore.RESET)
     
 
-
 # Defines Func2
 def function2():
 
@@ -50,9 +48,8 @@ def function2():
         # Gets bedrock IP
         bruser_input = input("Input valid server ip: ")
         brserver = BedrockServer.lookup(bruser_input)
-
-
         status = brserver.status()
+
 
         print(f"{bruser_input} has a max player count of {status.players.max}")
         print(colorama.Fore.LIGHTGREEN_EX, f"{bruser_input} has {status.players.online} player(s) online and replied in {status.latency} ms")
@@ -65,8 +62,8 @@ def function2():
 # Defines choices
 while True:
 
-    choice = menu()
 
+    choice = menu()
     match choice:
 
         # Func1
@@ -82,4 +79,3 @@ while True:
         # Invalid choice
         case _:
             print(colorama.Fore.RED, "Invalid choice", colorama.Fore.RESET)
-            
