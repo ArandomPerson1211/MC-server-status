@@ -1,9 +1,13 @@
-Just a simple Minecraft server status python project i'm working on
-Does Java and Bedrock servers
+I'm working on a simple Minecraft Server Status (MCSS) Python project that supports both Java and Bedrock servers. 
 
-You will need to install the dependencies you can do this with pip easily for example
+
+To get started, you will need to install the necessary dependencies this can be easily done using pip.
+
+For example:
 ```zsh
 
 pip install -r requirement.txt
 
 ```
+
+Feel free to let me know if there are any issues.

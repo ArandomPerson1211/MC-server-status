@@ -1,6 +1,7 @@
 # Imports packages
 from mcstatus import *
 import colorama
+import time
 
 
 # Initializes colorama
@@ -24,9 +25,9 @@ class Colours:
 # Defines Menu
 def menu():
     
-    print(Colours.CYAN, "1. Java")
-    print(Colours.CYAN, "2. Bedrock")
-    print(Colours.CYAN, "3. Exit", colorama.Fore.RESET)
+    print(Colours.L_MAGENTA, "1. Java")
+    print(Colours.L_MAGENTA, "2. Bedrock")
+    print(Colours.L_MAGENTA, "3. Exit", colorama.Fore.RESET)
 
     choice = input("Choose a server type: ")
 
@@ -42,40 +43,74 @@ def menu():
     return choice
 
 
-# Defines Fnc1
+# Defines javaServer
 def javaServer():
 
     # Gets IP
     user_input = input("Input valid server ip: ")
-    port = input("Input valid server port: ")
-    
-    try: 
-        
-        server = JavaServer.lookup(f"{user_input}:{port}")
 
+    if ":" in user_input:
+        user_input = user_input.split(":")[0]
+
+    port = input("Input valid server port: ")
+
+    try: 
+        server = JavaServer.lookup(f"{user_input}:{port}")
     except Exception as error:
-        print(Colours.L_RED, f"An error has ocurred: {error}")
+        print(Colours.L_RED, f"An error has occurred: {error}")
         return
-    
+
     status = server.status()
 
-    
     # Prints the amount of Players online 
-    print(Colours.CYAN, f"{user_input} has a max player count of {status.players.max}")
     print(Colours.CYAN, f"{user_input} has {status.players.online} player(s) online and replied in {status.latency} ms")
-    
 
     try:
         # Gets player(s) name
         query = server.query()
         print(Colours.L_GREEN, "Players online: ", query.players.names)
 
+        query_output = True
+
     except Exception as error:
-        print(Colours.L_RED, f"An error has ocurred: {error}")
-        print(Colours.ORANGE, "This server does not query enabled in server.properties")
+        print(Colours.L_RED, f"An error has occurred: {error}")
+        print(Colours.ORANGE, "This server does not have query enabled in server.properties")
+
+        query_output = False
+
+    repeat = input(Colours.CYAN + "Would you like to keep a live stream of the server? (y/n): ")
+
+    if repeat == "y":
+        length = input("How many seconds would you like to wait between each check? ")
+
+        try:
+            length = int(length)
+        except ValueError:
+            print(Colours.L_RED, "Invalid input")
+            return
+
+        while True:
+            time.sleep(length)
+            try:
+                status = server.status()
+                print(Colours.CYAN, f"{user_input} has {status.players.online} player(s) online and replied in {status.latency} ms")
+            except Exception as error:
+                print(Colours.L_RED, f"An error has occurred: {error}")
+                print(Colours.ORANGE, "This server may be offline or the address is incorrect")
+
+            if query_output:
+                try:
+                    query = server.query()
+                    print(Colours.L_GREEN, "Players online: ", query.players.names)
+                except Exception as error:
+                    print(Colours.L_RED, f"An error has occurred: {error}")
+                    print(Colours.ORANGE, "This server does not have query enabled in server.properties")
+            else:
+                print(Colours.ORANGE, "This server does not have query enabled in server.properties")
 
 
-# Defines Func2
+
+# Defines bedrockServer
 def bedrockServer():
 
     try:
@@ -86,7 +121,7 @@ def bedrockServer():
         status = BRserver.status()
 
 
-        print(f"{BRuser_input} has a max player count of {status.players.max}")
+        print(Colours.CYAN, f"{BRuser_input} has a max player count of {status.players.max}")
         print(Colours.CYAN, f"{BRuser_input} has {status.players.online} player(s) online and replied in {status.latency} ms")
         
 
@@ -115,3 +150,7 @@ while True:
         # Invalid choice
         case _:
             print(Colours.L_RED, "Invalid choice", Colours.RESET)
+
+
+    # End of code
+    Colours.RESET
