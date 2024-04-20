@@ -52,7 +52,7 @@ def javaServer():
     if ":" in user_input:
         user_input = user_input.split(":")[0]
 
-    port = input("Input valid server port: ")
+    port = input("Input valid server port (Optinal press enter for defualt port): ")
 
     try: 
         server = JavaServer.lookup(f"{user_input}:{port}")
@@ -153,4 +153,5 @@ while True:
 
 
     # End of code
-    Colours.RESET
+    while exit:
+        Colours.RESET
