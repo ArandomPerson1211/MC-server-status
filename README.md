@@ -1,4 +1,4 @@
-First of all Thanks to https://github.com/Kai-Denzel-Jane For helping me to cleanup and add some code.
+First of all Thanks to [Kai Jane](https://github.com/Kai-Denzel-Jane) For helping me to cleanup and add some code.
 
 This python script is a simple Minecraft Server Status (MCSS) that supports both Java and Bedrock servers.
 
