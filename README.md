@@ -7,7 +7,7 @@ To get started, you will need to install the necessary dependencies. This can be
 For example:
 ```zsh
 
-pip install -r requirement.txt
+pip install -r requirements.txt
 
 ```
 Feel free to let me know if you encounter any issues.
