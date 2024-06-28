@@ -49,6 +49,20 @@ def javaServer():
     # Gets IP
     user_input = input("Input valid server ip: ")
 
+    user_inputVIPCR = user_input.count(".")
+    user_inputVIPC = not any(char.isalpha() for char in user_input)
+
+    if user_inputVIPCR > 3:
+        pass
+    else: 
+        if user_inputVIPC:
+            print(Colours.L_RED, "Invalid input")
+            Colours.RESET
+            return javaServer()
+        else:
+            pass
+            
+
     if ":" in user_input:
         user_input = user_input.split(":")[0]
 
@@ -74,14 +88,14 @@ def javaServer():
 
     except Exception as error:
         print(Colours.L_RED, f"An error has occurred: {error}")
-        print(Colours.ORANGE, "This server does not have query enabled in server.properties")
+        print(Colours.ORANGE, "This server does not have query/rcon enabled in server.properties")
 
         query_output = False
 
     repeat = input(Colours.CYAN + "Would you like to keep a live stream of the server? (y/n): ")
 
     if repeat == "y":
-        length = input("How many seconds would you like to wait between each check? ")
+        length = input("How many seconds would you like to wait between each check?: ")
 
         try:
             length = int(length)
