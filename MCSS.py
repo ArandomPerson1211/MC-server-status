@@ -68,7 +68,7 @@ def javaServer():
         user_input = user_input.split(":")[0]
 
     port = input("Input valid server port (Optinal press enter for defualt port): ")
-    
+
     try: 
         server = JavaServer.lookup(f"{user_input}:{port}")
     except Exception as error:
@@ -169,8 +169,4 @@ while True:
         # Invalid choice
         case _:
             print(Colours.L_RED, "Invalid choice", Colours.RESET)
-
-
-    # End of code
-    while exit:
-        Colours.RESET
+        
