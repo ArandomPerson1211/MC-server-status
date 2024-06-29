@@ -49,6 +49,7 @@ def javaServer():
     # Gets IP
     user_input = input("Input valid server ip: ")
 
+    # Define Valid IP Check / Valid IP Check Raw / The Raw Means a IP with only numbers
     user_inputVIPCR = user_input.count(".")
     user_inputVIPC = not any(char.isalpha() for char in user_input)
 
@@ -67,7 +68,7 @@ def javaServer():
         user_input = user_input.split(":")[0]
 
     port = input("Input valid server port (Optinal press enter for defualt port): ")
-
+    
     try: 
         server = JavaServer.lookup(f"{user_input}:{port}")
     except Exception as error:
@@ -79,21 +80,24 @@ def javaServer():
     # Prints the amount of Players online 
     print(Colours.CYAN, f"{user_input} has {status.players.online} player(s) online and replied in {status.latency} ms")
 
+    # attempts to Gets player(s) name 
     try:
-        # Gets player(s) name
+        
         query = server.query()
         print(Colours.L_GREEN, "Players online: ", query.players.names)
-
+        # Activates query if it gets a response when trying to query
         query_output = True
-
+    # If it does not get a response when trying to query it will print an error and warn the user that it does not have query/rcon enabled
     except Exception as error:
         print(Colours.L_RED, f"An error has occurred: {error}")
         print(Colours.ORANGE, "This server does not have query/rcon enabled in server.properties")
-
+        # Deactivates query if it does not get a response when trying to query
         query_output = False
 
     repeat = input(Colours.CYAN + "Would you like to keep a live stream of the server? (y/n): ")
 
+
+    # Checks if user wants to keep a live stream
     if repeat == "y":
         length = input("How many seconds would you like to wait between each check?: ")
 
@@ -102,7 +106,7 @@ def javaServer():
         except ValueError:
             print(Colours.L_RED, "Invalid input")
             return
-
+        
         while True:
             time.sleep(length)
             try:
@@ -112,6 +116,7 @@ def javaServer():
                 print(Colours.L_RED, f"An error has occurred: {error}")
                 print(Colours.ORANGE, "This server may be offline or the address is incorrect")
 
+            # if query is True it tries to query if query is False it does not try to query
             if query_output:
                 try:
                     query = server.query()
