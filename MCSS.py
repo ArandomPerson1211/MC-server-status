@@ -25,9 +25,11 @@ class Colours:
 # Defines Menu
 def menu():
     
+    print("=== Menu ===")
     print(Colours.L_MAGENTA, "1. Java")
     print(Colours.L_MAGENTA, "2. Bedrock")
-    print(Colours.L_MAGENTA, "3. Exit", colorama.Fore.RESET)
+    print(Colours.L_MAGENTA, "3. Exit", Colours.RESET)
+    print("============")
 
     choice = input("Choose a server type: ")
 
